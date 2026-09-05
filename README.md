@@ -4,6 +4,7 @@ A browser-based musical marble machine. You build a board out of planks, bumpers
 drop a marble into it, and the bounces play music. Every piece is tuned to a note and
 sounds it when the marble strikes it.
 
+**Live URL:**  https://marble-machine.onrender.com/
 ---
 
 ## What it does
@@ -99,10 +100,6 @@ ID gets `404`.
 Roughly **7 hours**.
 
 ---
-
-## Deployment
-
-**Live URL:**  https://marble-machine.onrender.com/
 
 ### Configuring a service created by hand
 
