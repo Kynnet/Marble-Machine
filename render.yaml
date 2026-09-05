@@ -1,0 +1,27 @@
+# Render Blueprint. Deploy with: New > Blueprint, pointed at this repository.
+#
+# SQLite stores everything in a single file, so the service needs a persistent
+# disk. Render only offers disks on paid instance types — on the free instance
+# type the filesystem is wiped on every deploy, restart, and idle spin-down,
+# which would delete all accounts and saved boards.
+services:
+  - type: web
+    name: marble-machine
+    runtime: node
+    plan: starter
+    buildCommand: ./build.sh
+    startCommand: npm start
+    healthCheckPath: /api/auth/me
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Generated once and kept across deploys; changing it invalidates sessions.
+      - key: SESSION_SECRET
+        generateValue: true
+      # Must sit inside the disk mount below, or the database is not persisted.
+      - key: DB_FILE
+        value: /data/marble.db
+    disk:
+      name: marble-data
+      mountPath: /data
+      sizeGB: 1
